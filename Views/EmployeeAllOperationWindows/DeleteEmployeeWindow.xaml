@@ -1,0 +1,57 @@
+﻿<Window x:Class="CulturalSiberiaProject.Views.EmployeeAllOperationWindows.DeleteEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Title="Удаление работника" Height="300" Width="400"
+        MinHeight="300" MinWidth="400"
+        MaxHeight="300" MaxWidth="400"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Icon/Logotip.png"
+        Background="Black">
+    <Window.Resources>
+        <SolidColorBrush x:Key="BlackBrush" Color="Black"/>
+        <SolidColorBrush x:Key="AliceBlueBrush" Color="#F0F8FF"/>
+        <SolidColorBrush x:Key="TurquoiseBrush" Color="#40E0D0"/>
+        <SolidColorBrush x:Key="LightBlackBrush" Color="#4F4F4F"/>
+        
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource AliceBlueBrush}"/>
+            <Setter Property="Background" Value="{StaticResource LightBlackBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource LightBlackBrush}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+            <Setter Property="Background" Value="{StaticResource LightBlackBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlackBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Button Content="Отмена" Margin="10,15,0,0" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="35"
+                Click="CloseCurrentWindow_Click"/>
+        <TextBlock Text="Удаление пользователя" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="18"
+                   Margin="0,60,0,0"/>
+        
+        <StackPanel Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="ID пользователя:"  FontSize="16"  Margin="0,0,0,10"/>
+            <TextBox Name="EmployeeId" Margin="0,0,0,20" Width="250" Height="25"/>
+        </StackPanel>
+        
+        <Button Content="Удалить пользователя" Width="150" Height="35" HorizontalAlignment="Center"
+                VerticalAlignment="Bottom" Margin="0,0,0,50" Click="DeleteEventButton_Click"/>
+    </Grid>
+</Window>

@@ -1,0 +1,8 @@
+﻿<Application x:Class="CulturalSiberiaProject.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:services="clr-namespace:CulturalSiberiaProject.Services">
+    <Application.Resources>
+        <services:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Application.Resources>
+</Application>

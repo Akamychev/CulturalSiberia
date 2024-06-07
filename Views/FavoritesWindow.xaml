@@ -1,0 +1,62 @@
+﻿<Window x:Class="CulturalSiberiaProject.Views.FavoritesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:services="clr-namespace:CulturalSiberiaProject.Services"
+        mc:Ignorable="d"
+        Title="Избранное" Height="450" Width="800"
+        MinHeight="450" MinWidth="800"
+        MaxHeight="450" MaxWidth="800"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Icon/Logotip.png"
+        Background="Black">
+    <Window.Resources>
+        <services:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        
+        <SolidColorBrush x:Key="BlackBrush" Color="Black"/>
+        <SolidColorBrush x:Key="TurquoiseBrush" Color="#40E0D0"/>
+        <SolidColorBrush x:Key="LightBlackBrush" Color="#4F4F4F"/>
+        <SolidColorBrush x:Key="Brush" Color="#1E1E1E"/>
+        
+        <Style TargetType="ListView">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+            <Setter Property="Background" Value="{StaticResource Brush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlackBrush}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+            <Setter Property="Background" Value="{StaticResource LightBlackBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlackBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Button Content="Главное меню" Width="150" Height="35" HorizontalAlignment="Left" Margin="10"
+                VerticalAlignment="Top" Click="CloseCurrentWindow_Click"/>
+        
+        <ListView ItemsSource="{Binding FavoriteEvents}" HorizontalAlignment="Center" Width="550" Height="380" Margin="10,50,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Cinema.Nameing}" Visibility="{Binding Cinema}" 
+                                   FontSize="16"/>
+                        <TextBlock Text="{Binding Cinema.Realisedate, StringFormat='{}{0:dd MMMM yyyy}'}"/>
+                        <TextBlock Text="{Binding Concert.Programofconcert}" 
+                                   Visibility="{Binding Concert}" FontSize="16"/>
+                        <TextBlock Text="{Binding Concert.Concertdate, StringFormat='{}{0:dd MMMM yyyy}'}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>

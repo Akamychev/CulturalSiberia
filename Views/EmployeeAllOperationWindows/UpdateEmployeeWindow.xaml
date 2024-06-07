@@ -1,0 +1,85 @@
+﻿<Window x:Class="CulturalSiberiaProject.Views.EmployeeAllOperationWindows.UpdateEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Title="Обновление данных работника" Height="450" Width="700"
+        MinHeight="450" MinWidth="700"
+        MaxHeight="450" MaxWidth="700"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Icon/Logotip.png"
+        Background="Black">
+    <Window.Resources>
+        <SolidColorBrush x:Key="BlackBrush" Color="Black"/>
+        <SolidColorBrush x:Key="AliceBlueBrush" Color="#F0F8FF"/>
+        <SolidColorBrush x:Key="TurquoiseBrush" Color="#40E0D0"/>
+        <SolidColorBrush x:Key="LightBlackBrush" Color="#4F4F4F"/>
+        
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource AliceBlueBrush}"/>
+            <Setter Property="Background" Value="{StaticResource LightBlackBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource LightBlackBrush}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+            <Setter Property="Background" Value="{StaticResource LightBlackBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlackBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Button Content="Отмена" Width="150" Height="35" HorizontalAlignment="Left" Margin="10,25,0,0"
+                VerticalAlignment="Top" Click="CloseCurrentWindow_Click"/>
+        <TextBlock Text="Обновление пользователя" Margin="0, 30, 0, 10" FontSize="18" Width="250" Height="33" 
+                   TextAlignment="Center" VerticalAlignment="Top"/>
+        
+        <TextBlock Text="ID пользователя" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="16"
+                   Margin="0,70,200,0"/>
+        <TextBox x:Name="EmployeeId" VerticalAlignment="Top" HorizontalAlignment="Center" Width="250" Height="25"
+                 Margin="180,70,0,0"/>
+        <Button Content="Загрузить данные"  VerticalAlignment="Top" HorizontalAlignment="Center" Width="150" Height="35"
+                Margin="0,120,0,0" Click="LoadEmployeeDataButton_Click"/>
+        
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,50,0,0">
+            
+            <TextBlock Text="Имя:*" FontSize="16" Width="250" Height="25" TextAlignment="Left" />        
+            <TextBox Name="FirstName" Width="250" Height="25" />
+            
+            <TextBlock Text="Фамилия:*" FontSize="16" Width="250" Height="25" TextAlignment="Left" />
+            <TextBox Name="LastName"  Width="250" Height="25" />
+            
+            <TextBlock Text="Отчество:" FontSize="16" Width="250" Height="25" TextAlignment="Left" />
+            <TextBox Name="MiddleName" Width="250" Height="25" />
+            
+        </StackPanel>
+        
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,50,10,0">
+            
+            <TextBlock Text="Email:" FontSize="16" Width="250" Height="25" TextAlignment="Left"/>
+            <TextBox Name="Email"  Width="250" Height="25"/>
+            
+            <TextBlock Text="Логин:*" FontSize="16" Width="250" Height="25" TextAlignment="Left"/>
+            <TextBox Name="Login"  Width="250" Height="25"/>
+            
+            <TextBlock Text="Пароль:*" FontSize="16" Width="250" Height="25" TextAlignment="Left"/>
+            <TextBox Name="Password" Width="250" Height="25"/>
+            
+        </StackPanel>
+        
+        <Button Content="Обновить" Width="150" Height="35" HorizontalAlignment="Center" Margin="30"
+                VerticalAlignment="Bottom" Click="UpdateCinemaButton_Click"/>
+        
+    </Grid>
+</Window>

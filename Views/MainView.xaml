@@ -1,0 +1,122 @@
+﻿<Window x:Class="CulturalSiberiaProject.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:services="clr-namespace:CulturalSiberiaProject.Services"
+        Title="Главное меню" Width="800" Height="450"
+        MinWidth="800" MinHeight="450"
+        MaxWidth="800" MaxHeight="450"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Icon/Logotip.png"
+        mc:Ignorable="d"
+        Background="Black">
+    <Window.Resources>
+        <services:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <services:EventTypeToVisibilityConverter x:Key="EventTypeToVisibilityConverter"/>
+        <services:BooleanToFavoriteTextConverter x:Key="BooleanToFavoriteTextConverter"/>
+        
+        <SolidColorBrush x:Key="BlackBrush" Color="Black"/>
+        <SolidColorBrush x:Key="AliceBlueBrush" Color="#F0F8FF"/>
+        <SolidColorBrush x:Key="TurquoiseBrush" Color="#40E0D0"/>
+        <SolidColorBrush x:Key="LightBlackBrush" Color="#4F4F4F"/>
+        <SolidColorBrush x:Key="Brush" Color="#1E1E1E"/>
+        
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource AliceBlueBrush}"/>
+            <Setter Property="Background" Value="{StaticResource LightBlackBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource LightBlackBrush}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+            <Setter Property="Background" Value="{StaticResource LightBlackBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlackBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+            <Setter Property="Background" Value="{StaticResource AliceBlueBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlackBrush}"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Foreground" Value="{StaticResource TurquoiseBrush}"/>
+            <Setter Property="Background" Value="{StaticResource Brush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlackBrush}"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Text="Поиск:" Margin="15"
+                   Width="60"/>
+        <TextBox Width="200" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left"
+                 Margin="80,15,0,0" Text="{Binding SearchQuery , UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <Button Content="Избранное" VerticalAlignment="Top" HorizontalAlignment="Right" Width="150" Height="35"
+                Margin="0,10,175,0" Click="OpenFavorites_Click"/>
+        
+        <Button Content="Личный кабинет" HorizontalAlignment="Right" VerticalAlignment="Top" Width="150" Height="35"
+                Margin="0,10,10,0" Click="OpenPersonalCabienet_Click"/>
+        
+        <ListView ItemsSource="{Binding Events}" HorizontalAlignment="Left" Width="550" Height="380" 
+                  Margin="10,50,0,0" MouseDoubleClick="OnEventDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical" Width="400">
+                            <TextBlock Text="{Binding Cinema.Nameing}" 
+                                       Visibility="{Binding 
+                               Converter={StaticResource EventTypeToVisibilityConverter}, 
+                               ConverterParameter='Cinema'}"/>
+                            <TextBlock Text="{Binding Concert.Programofconcert}" 
+                                       Visibility="{Binding 
+                               Converter={StaticResource EventTypeToVisibilityConverter}, 
+                               ConverterParameter='Concert'}"/>
+                            <TextBlock Text="{Binding Cinema.Realisedate,
+                             StringFormat='{}{0:dd MMMM yyyy}'}"/>
+                            <TextBlock Text="{Binding Concert.Concertdate,
+                             StringFormat='{}{0:dd MMMM yyyy}'}"/>
+                        </StackPanel>
+                        <Button Content="{Binding Isfavorite,
+                        Converter={StaticResource BooleanToFavoriteTextConverter}}"
+                                Command="{Binding DataContext.ToggleFavoriteCommand,
+                                RelativeSource={RelativeSource AncestorType=ListView}}"
+                                CommandParameter="{Binding}"
+                                Margin="10,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Margin="0,0,10,10">
+            <CheckBox Content="Кино" IsChecked="{Binding FilterCinema}" Margin="0,0,10,10" FontSize="13"/>
+            <CheckBox Content="Концерт" IsChecked="{Binding FilterConcert}" FontSize="13"/>
+        </StackPanel>
+        
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,200,60,0">
+            <TextBlock Text="Техническая поддержка: " Margin="0,10,0,0"/>
+            <TextBlock Text="Электронная почта: " Margin="0,10,0,0"/>
+            <TextBlock Text="akamychev@inbox.ru"/>
+            <TextBlock Text="Номер горячей линии: " Margin="0,10,0,0"/>
+            <TextBlock Text="8-952-803-25-84"/>
+        </StackPanel>
+        
+        <Button Content="Обновить мероприятия" VerticalAlignment="Center" HorizontalAlignment="Right" Width="150" Height="35"
+                Margin="0,0,50,230" Command="{Binding RefreshCommand}"/>
+        
+        <Button Content="Инструментарий" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                Margin="0,0,10,10" Visibility="{Binding IsAdminOrStaff,
+                Converter={StaticResource BooleanToVisibilityConverter}}"
+                Click="OpenToolKit_click" Width="150" Height="35"/>
+    </Grid>
+</Window>
